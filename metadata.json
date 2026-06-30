@@ -1,0 +1,6 @@
+{
+  "name": "Bondog Food",
+  "description": "Landing page de comida B.A.R.F natural y premium para perros y gatos inspired by voldogfood.com",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
