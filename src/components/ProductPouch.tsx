@@ -11,8 +11,6 @@ export default function ProductPouch({ product, size = 'md' }: ProductPouchProps
   const isCatRaw = product.category === 'gato';
   const isSnack = product.category === 'snack';
   const isRawFood = isDogRaw || isCatRaw || isSnack;
-  const isSuperfood = product.category === 'superfood';
-  const isCuidado = product.category === 'cuidado';
 
   // Extract clean ingredient list for illustration
   const getIngredientEmojis = () => {
@@ -71,7 +69,7 @@ export default function ProductPouch({ product, size = 'md' }: ProductPouchProps
   }[size];
 
   // If a custom high-quality Google Drive studio photo is provided, render it directly with professional depth shadows
-  if (product.image && (product.image.includes('googleusercontent.com') || product.image.includes('drive.google.com'))) {
+  if (product.image && (product.image.includes('googleusercontent.com') || product.image.includes('drive.google.com') || product.image.startsWith('/product-') || product.image.startsWith('/pet-'))) {
     let imageUrl = product.image;
     if (imageUrl.includes('drive.google.com') && imageUrl.includes('id=')) {
       const id = imageUrl.split('id=')[1]?.split('&')[0];
@@ -84,7 +82,7 @@ export default function ProductPouch({ product, size = 'md' }: ProductPouchProps
     // Keep custom studio photo images strictly inside the card boundaries to avoid white background spills
     const imageContainerDimensions = {
       sm: 'w-full h-[220px]',
-      md: 'w-full h-[320px] md:h-[380px]',
+      md: 'w-full h-[240px] md:h-[280px]',
       lg: 'w-full h-[360px] md:h-[480px]'
     }[size];
 
@@ -93,16 +91,17 @@ export default function ProductPouch({ product, size = 'md' }: ProductPouchProps
     const scaleClass = 'scale-[1.6]';
 
     return (
-      <div className={`relative ${imageContainerDimensions} flex flex-col items-center justify-center select-none group transition-all duration-500 overflow-hidden rounded-[24px]`}>
-        {/* Outer zoom wrapper: handles hover scale */}
-        <div className="w-full h-full flex items-center justify-center transition-transform duration-500 transform group-hover:scale-[1.06]">
+      <div className={`relative ${imageContainerDimensions} flex flex-col items-center justify-center select-none transition-all duration-500 overflow-hidden rounded-[24px] mix-blend-multiply`}>
+        {/* Outer wrapper */}
+        <div className="w-full h-full flex items-center justify-center transition-transform duration-500 transform mix-blend-multiply">
           {/* Inner scale wrapper: balances out padding inconsistencies */}
-          <div className={`w-full h-full flex items-center justify-center ${scaleClass}`}>
+          <div className={`w-full h-full flex items-center justify-center ${scaleClass} mix-blend-multiply`}>
             <img
               src={imageUrl}
               alt={product.name}
-              className="max-w-full max-h-full object-contain mix-blend-multiply contrast-[1.04] brightness-[1.02]"
+              className="max-w-full max-h-full object-contain contrast-[1.04] brightness-[1.02] mix-blend-multiply"
               referrerPolicy="no-referrer"
+              loading="eager"
             />
           </div>
         </div>
@@ -216,60 +215,5 @@ export default function ProductPouch({ product, size = 'md' }: ProductPouchProps
     );
   }
 
-
-
-  // Render Apothecary Style Glass Bottle or Jar (for Superfoods and Care Products)
-  return (
-    <div className={`relative ${dimensions} flex flex-col items-center select-none group filter drop-shadow-[0_8px_12px_rgba(0,0,0,0.08)] group-hover:drop-shadow-[0_16px_20px_rgba(0,0,0,0.15)] transition-all duration-500`}>
-      {/* Container simulating high-end cosmetics/supplements packaging */}
-      <div className="w-full h-full bg-[#FCFBF9] rounded-2xl relative overflow-hidden flex flex-col justify-between p-4 border border-gray-200/50 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
-        
-        {/* Outer shadow highlight */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-gray-100/10 via-white/5 to-white/10 pointer-events-none" />
-
-        {/* Minimalist Top Lid (simulates black metal cap or dropper) */}
-        <div className="w-16 h-4 bg-gradient-to-r from-neutral-800 to-neutral-950 rounded-md mx-auto shadow-sm -mt-4 relative z-10 border-b border-black/30">
-          <div className="w-12 h-1 bg-white/20 mx-auto rounded-full mt-0.5" />
-        </div>
-
-        {/* Brand label top */}
-        <div className="text-center mt-2">
-          <span className="text-[6.5px] font-bold text-gray-400 tracking-[0.25em] uppercase">BON DOG ORGANICS</span>
-          <div className="w-6 h-[1px] bg-amber-600/30 mx-auto mt-1" />
-        </div>
-
-        {/* Elegant Centered Illustration representing healthy nutrition */}
-        <div className="my-auto py-2 flex flex-col items-center">
-          <div className="w-16 h-16 rounded-full bg-amber-50/80 border border-amber-600/10 flex items-center justify-center text-2xl relative group-hover:border-amber-600/25 transition-all duration-300">
-            {product.name.includes('Aceite') ? '🧴' : product.name.includes('Kéfir') ? '🥛' : product.name.includes('Espirulina') ? '🌿' : '🌸'}
-          </div>
-          <h4 className="text-[10px] md:text-[11px] font-extrabold text-[#113E2E] text-center uppercase tracking-wide mt-3 px-1.5 leading-tight">
-            {product.name}
-          </h4>
-          <span className="text-[6.5px] text-amber-700/80 font-bold uppercase tracking-wider block mt-1">
-            SUPLEMENTO ACTIVO
-          </span>
-        </div>
-
-        {/* Minimalist Medical Style Label Details */}
-        <div className="bg-[#FAF9F5] border border-gray-100 rounded-lg p-2 text-[6px] text-gray-500 font-sans flex flex-col gap-0.5">
-          <div className="flex justify-between border-b border-gray-200/50 pb-1">
-            <span className="font-bold text-[#1F2937]">ORIGEN</span>
-            <span>100% Ecológico</span>
-          </div>
-          <div className="flex justify-between pt-0.5">
-            <span className="font-bold text-[#1F2937]">CONTENIDO</span>
-            <span>{product.weight}</span>
-          </div>
-        </div>
-
-        {/* Footer brand details */}
-        <div className="text-center text-[5.5px] font-bold text-gray-400 tracking-wider">
-          CUIDADO HOLÍSTICO NATURAL
-        </div>
-      </div>
-      {/* Shadows */}
-      <div className="absolute -bottom-1.5 w-[70%] h-2 bg-gray-200 rounded-full blur-[4px] -z-10" />
-    </div>
-  );
+  return null;
 }

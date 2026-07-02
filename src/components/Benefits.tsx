@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface BenefitsProps {
@@ -10,7 +9,7 @@ const containerVariants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.16,
+      staggerChildren: 0.15,
     }
   }
 };
@@ -18,97 +17,98 @@ const containerVariants = {
 const itemVariants = {
   hidden: { 
     opacity: 0, 
-    scale: 0.85, 
-    y: 35 
+    y: 20
   },
   show: { 
     opacity: 1, 
-    scale: 1, 
-    y: 0,
+    y: 0, 
     transition: {
-      type: 'spring',
-      stiffness: 130,
-      damping: 15,
-      mass: 0.8
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
     }
   }
+};
+
+interface Benefit {
+  title: string;
+  desc: string;
+}
+
+const BenefitCard: React.FC<{ benefit: Benefit }> = ({ benefit }) => {
+  return (
+    <motion.div 
+      variants={itemVariants}
+      className="py-6 border-b border-white/10 flex flex-col md:flex-row md:items-start gap-4 md:gap-8 cursor-default text-center md:text-left items-center md:items-start"
+    >
+      {/* Título en tipografía display refinada, sin badges ni símbolos */}
+      <h3 className="font-display font-semibold text-lg md:text-xl tracking-tight text-[#FAF8F5] md:w-1/3 shrink-0">
+        {benefit.title}
+      </h3>
+      {/* Descripción limpia */}
+      <p className="text-sm leading-relaxed font-normal text-white/70 md:w-2/3">
+        {benefit.desc}
+      </p>
+    </motion.div>
+  );
 };
 
 export default function Benefits({ onScrollTo }: BenefitsProps) {
   const coreBenefits = [
     {
-      title: "Digestión perfecta",
-      desc: "Heces un 50% más pequeñas, firmes y sin olor penetrante gracias a una absorción de nutrientes del 90%."
+      title: "Digestión ligera",
+      desc: "Absorción óptima de nutrientes que se traduce en digestiones notablemente más cortas y un bienestar digestivo inmediato."
     },
     {
-      title: "Pelo y piel radiantes",
-      desc: "Ácidos grasos esenciales naturales que eliminan la dermatitis, frenan la caída y aportan un brillo extremo."
+      title: "Piel y manto radiantes",
+      desc: "Aporte natural de ácidos grasos esenciales que fortalecen la barrera cutánea, reducen la caída y devuelven el brillo natural."
     },
     {
-      title: "Dientes libres de sarro",
-      desc: "Las enzimas activas del alimento fresco combaten las bacterias bucales de forma natural, mejorando el aliento."
+      title: "Salud e higiene bucal",
+      desc: "Las enzimas presentes en los ingredientes frescos actúan activamente contra la acumulación de sarro y mejoran el aliento."
     },
     {
-      title: "Salud inmunológica",
-      desc: "Proteínas de alta calidad y antioxidantes reales que fortalecen sus defensas celulares frente a enfermedades."
+      title: "Refuerzo inmunológico",
+      desc: "Proteínas e ingredientes seleccionados de alta calidad biológica que blindan y sostienen sus defensas naturales diariamente."
     }
   ];
 
   return (
-    <section id="beneficios" className="bg-white px-6 md:px-12 lg:px-20 py-24 md:py-32 scroll-mt-20 relative">
-      <div className="max-w-4xl lg:max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16 xl:gap-24">
+    <section id="beneficios" className="bg-[#113E2E] px-6 md:px-12 lg:px-20 py-24 md:py-32 scroll-mt-20 relative text-[#FAF8F5]">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-16 xl:gap-24">
           
-          {/* Editorial Minimal Header */}
-          <div className="max-w-2xl lg:w-1/2 mb-16 lg:mb-0">
-            <h2 className="text-3xl md:text-5xl lg:text-[54px] font-extrabold text-[#113E2E] tracking-tight leading-tight font-display">
+          {/* Columna Izquierda: Encabezado Editorial */}
+          <div className="max-w-2xl lg:w-1/2 mb-16 lg:mb-0 text-center lg:text-left flex flex-col items-center lg:items-start">
+            <h2 className="text-3xl md:text-5xl lg:text-[48px] font-semibold tracking-tight leading-tight font-display text-white">
               Su salud se transforma cuando vuelve a comer <span className="text-[#EA580C]">comida real</span>
             </h2>
-            <p className="mt-6 text-gray-500 text-sm md:text-base lg:text-lg leading-relaxed">
-              Sustituir los ultraprocesados industriales por alimentos frescos desata una mejora profunda que verás reflejada en su energía, su pelaje y su felicidad diaria.
+            <p className="mt-6 text-white/70 text-sm md:text-base leading-relaxed max-w-lg">
+              Sustituir los ultraprocesados por porciones biológicamente adecuadas desata una mejora profunda que se nota en su energía, su pelaje y su vitalidad diaria.
             </p>
             
-            {/* Clean, Simple Call To Action - moved to left column on desktop */}
-            <div className="mt-10 lg:mt-12 text-left">
+            {/* CTA Limpio y Minimalista sin iconos de flechas */}
+            <div className="mt-10 lg:mt-12 text-center lg:text-left">
               <motion.button
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => onScrollTo('productos')}
-                className="inline-flex items-center gap-2.5 bg-[#EA580C] hover:bg-[#113E2E] text-white font-display font-extrabold text-[11px] md:text-xs tracking-widest uppercase px-8 py-4 rounded-full shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer relative z-20"
+                className="inline-flex items-center bg-[#EA580C] hover:bg-white hover:text-[#113E2E] text-white font-display font-bold text-xs tracking-widest uppercase px-8 py-4 rounded-full shadow-sm transition-all duration-300 cursor-pointer relative z-20"
               >
-                Comenzar hoy mismo
-                <ArrowRight className="w-3.5 h-3.5" />
+                Comenzar cambio
               </motion.button>
             </div>
           </div>
 
-          {/* Minimalist Pills Layout */}
+          {/* Columna Derecha: Lista Asimétrica de Beneficios */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, margin: "-80px" }}
-            className="flex flex-col gap-4 lg:w-1/2"
+            viewport={{ once: true, margin: "-10% 0px" }}
+            className="flex flex-col lg:w-1/2 border-t border-white/10"
           >
-            {coreBenefits.map((benefit, idx) => {
-              return (
-                <motion.div 
-                  key={idx}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.015, y: -2 }}
-                  className="group bg-[#FBFBFA] hover:bg-[#EA580C] border border-gray-100 hover:border-transparent rounded-3xl md:rounded-full lg:rounded-3xl xl:rounded-full px-6 py-5 md:py-4 flex flex-col md:flex-row md:items-center lg:flex-col lg:items-start xl:flex-row xl:items-center gap-3 md:gap-6 lg:gap-4 xl:gap-6 shadow-xs hover:shadow-md transition-all duration-300 ease-out cursor-default"
-                >
-                  {/* Title Pill Badge */}
-                  <div className="bg-[#113E2E]/10 text-[#113E2E] group-hover:bg-white group-hover:text-[#EA580C] px-4.5 py-2 rounded-full text-xs font-extrabold tracking-wider uppercase text-center shrink-0 transition-all duration-300">
-                    {benefit.title}
-                  </div>
-                  {/* Description text */}
-                  <p className="text-xs md:text-sm text-gray-600 group-hover:text-white/95 leading-relaxed font-medium transition-colors duration-300">
-                    {benefit.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
+            {coreBenefits.map((benefit, idx) => (
+              <BenefitCard key={idx} benefit={benefit} />
+            ))}
           </motion.div>
 
         </div>

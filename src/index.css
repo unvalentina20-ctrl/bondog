@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Montserrat", sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Figtree", sans-serif;
+  --font-syne: "Figtree", sans-serif;
   
-  --color-voldog-green-dark: #8C370D;
-  --color-voldog-green-medium: #D97706;
-  --color-voldog-black: #1A1A1A;
-  --color-voldog-gray-light: #FAF6F0;
-  --color-voldog-gray-medium: #888888;
-  --color-voldog-gold: #FED366;
+  --color-voldog-green-dark: #113E2E;
+  --color-voldog-green-medium: #0a271d;
+  --color-voldog-black: #18181b;
+  --color-voldog-gray-light: #FAF8F5;
+  --color-voldog-gray-medium: #71717a;
+  --color-voldog-gold: #EA580C;
   
   --animate-marquee: marquee 25s linear infinite;
   
@@ -30,6 +31,7 @@
   
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
+    font-weight: 600;
   }
 }
 

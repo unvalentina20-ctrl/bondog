@@ -47,110 +47,87 @@ export default function Reviews() {
   };
 
   return (
-    <section id="reseñas" className="bg-white px-4 md:px-8 pb-4 md:pb-8 scroll-mt-24">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full bg-[#F9FAFB] rounded-[32px] md:rounded-[48px] py-16 md:py-24 px-6 md:px-12 border border-gray-100 text-voldog-black"
-      >
-        <div className="max-w-6xl mx-auto">
-          {/* Title block with staggered scroll entrance */}
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={textContainerVariants}
-            className="text-center max-w-3xl mx-auto mb-16"
+    <section id="reseñas" className="bg-[#FAF8F5] px-6 md:px-12 py-16 md:py-24 scroll-mt-24">
+      <div className="max-w-6xl mx-auto">
+        {/* Title block with staggered scroll entrance */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={textContainerVariants}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <motion.h2 
+            variants={textItemVariants}
+            className="text-4xl md:text-5xl font-display font-semibold text-[#113E2E] tracking-tight leading-tight"
           >
-            <motion.h2 
-              variants={textItemVariants}
-              className="text-3xl md:text-4xl font-extrabold text-[#113E2E] tracking-tight leading-tight"
-            >
-              Historias de <span className="text-[#EA580C]">transformación y salud real</span>
-            </motion.h2>
-            <motion.p 
-              variants={textItemVariants}
-              className="mt-4 text-[#4B5563] text-sm md:text-base leading-relaxed font-normal"
-            >
-              Conoce la experiencia de familias reales que decidieron sustituir los alimentos secos ultraprocesados por las recetas frescas y biológicamente adecuadas de BON DOG.
-            </motion.p>
-
-            {/* Average Rating Widget Badge */}
-            <motion.div 
-              variants={textItemVariants}
-              className="inline-flex flex-wrap items-center justify-center gap-2 md:gap-3 bg-white px-5 py-2.5 rounded-full border border-gray-200 mt-6 shadow-xs"
-            >
-              <span className="text-sm font-extrabold text-[#113E2E] flex items-center gap-1">
-                4.8 <Star className="w-4 h-4 fill-[#FED366] stroke-none" />
-              </span>
-              <span className="text-xs text-gray-300 font-semibold">•</span>
-              <span className="text-xs font-semibold text-[#4B5563]">Basado en 570 reseñas</span>
-            </motion.div>
-          </motion.div>
-
-          {/* 4-Column Reviews Grid with staggered entrance */}
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={cardGridVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            Lo que dicen de nosotros es simple:<br />
+            <span className="text-[#EA580C] font-medium">comida de verdad</span>
+          </motion.h2>
+          <motion.p 
+            variants={textItemVariants}
+            className="mt-4 text-[#71717a] text-sm md:text-base leading-relaxed font-normal max-w-md mx-auto"
           >
-            {REVIEWS.map((r) => (
-              <motion.div
-                key={r.id}
-                variants={cardItemVariants}
-                className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 flex flex-col justify-between hover:shadow-md transition-all duration-300 text-voldog-black relative z-20"
-              >
-                {/* Header: User Profile */}
-                <div>
-                  <div className="flex items-center gap-3.5 mb-4">
-                    {/* Circular Avatar */}
-                    <img
-                      src={r.avatar}
-                      alt={r.name}
-                      className="w-11 h-11 rounded-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div>
-                      <h4 className="font-display font-extrabold text-sm text-[#113E2E] leading-tight">
-                        {r.name}
-                      </h4>
-                      {/* Date */}
-                      <div className="flex items-center gap-2 mt-0.5">
-                        <span className="text-[10px] text-gray-400 font-medium">
-                          {r.date}
-                        </span>
-                      </div>
+            Familias reales que cambiaron los ultraprocesados por nutrición biológicamente adecuada.
+          </motion.p>
+        </motion.div>
+
+        {/* 4-Column Reviews Grid */}
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {REVIEWS.map((r) => (
+            <div
+              key={r.id}
+              className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200/40 flex flex-col justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.015)] transition-all duration-300 text-voldog-black relative z-20 text-center md:text-left"
+            >
+              {/* Header: User Profile */}
+              <div className="flex flex-col items-center md:items-start">
+                <div className="flex flex-col md:flex-row items-center md:items-start gap-3.5 mb-4 text-center md:text-left">
+                  {/* Circular Avatar */}
+                  <img
+                    src={r.avatar}
+                    alt={r.name}
+                    className="w-10 h-10 rounded-full object-cover"
+                    referrerPolicy="no-referrer"
+                    loading="eager"
+                  />
+                  <div className="flex flex-col items-center md:items-start">
+                    <h4 className="font-sans font-bold text-sm text-[#113E2E] leading-tight">
+                      {r.name}
+                    </h4>
+                    {/* Date */}
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-[10px] text-gray-400 font-medium">
+                        {r.date}
+                      </span>
                     </div>
                   </div>
-
-                  {/* Stars */}
-                  <div className="flex gap-0.5 mb-4">
-                    {[...Array(5)].map((_, index) => (
-                      <Star
-                        key={index}
-                        className={`w-3.5 h-3.5 ${
-                          index < r.rating
-                            ? 'fill-[#FED366] stroke-none'
-                            : 'text-gray-200'
-                        }`}
-                      />
-                    ))}
-                  </div>
-
-                  {/* Testimonial text */}
-                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed font-normal">
-                    "{r.text}"
-                  </p>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
+
+                {/* Stars */}
+                <div className="flex gap-0.5 mb-4 justify-center md:justify-start">
+                  {[...Array(5)].map((_, index) => (
+                    <Star
+                      key={index}
+                      className={`w-3 h-3 ${
+                        index < r.rating
+                          ? 'fill-[#EA580C] stroke-none'
+                          : 'text-gray-200'
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Testimonial text */}
+                <p className="text-xs md:text-sm text-gray-600 leading-relaxed font-normal text-center md:text-left">
+                  "{r.text}"
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

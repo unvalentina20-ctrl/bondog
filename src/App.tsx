@@ -4,21 +4,14 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Products from './components/Products';
-import Benefits from './components/Benefits';
-import Snacks from './components/Snacks';
-import Reviews from './components/Reviews';
-import FAQ from './components/FAQ';
-import Footer from './components/Footer';
-import CartModal from './components/CartModal';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Checkout from './pages/Checkout';
+import Success from './pages/Success';
 import { Product, CartItem } from './types';
 
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [activePetTab, setActivePetTab] = useState<'perro' | 'gato'>('perro');
 
   // Load cart from localStorage initially
   useEffect(() => {
@@ -65,32 +58,6 @@ export default function App() {
     saveCart(updated);
   };
 
-  // Smooth scroll handler targeting elements with custom offset for the sticky header
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const headerOffset = 100;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  // Handle visual tab selection from other parts of the site (e.g. Hero, Categories)
-  const handleSelectPetType = (type: 'perro' | 'gato') => {
-    setActivePetTab(type);
-  };
-
-  const handleSelectCategory = (catId: string) => {
-    if (catId === 'perro' || catId === 'gato') {
-      setActivePetTab(catId);
-    }
-  };
-
   const handleClearCart = () => {
     saveCart([]);
   };
@@ -98,53 +65,39 @@ export default function App() {
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-white relative">
-      {/* 2. NAVBAR */}
-      <Navbar
-        cartItemsCount={cartCount}
-        onOpenCart={() => setCartOpen(true)}
-        onScrollTo={scrollToSection}
-      />
-
-      {/* 3. HERO SECTION */}
-      <Hero
-        onSelectPetType={handleSelectPetType}
-        activePetType={activePetTab}
-        onOpenCart={() => setCartOpen(true)}
-        cartItemsCount={cartCount}
-      />
-
-      {/* 6. FEATURED PRODUCTS STORE */}
-      <Products
-        activeTab={activePetTab}
-        setActiveTab={setActivePetTab}
-        onAddToCart={handleAddToCart}
-      />
-
-      {/* 7. BENEFITS */}
-      <Benefits onScrollTo={scrollToSection} />
-
-      {/* 8. SNACKS AND TREATS */}
-      <Snacks onAddToCart={handleAddToCart} onScrollTo={scrollToSection} />
-
-      {/* 9. CUSTOMER REVIEWS */}
-      <Reviews />
-
-      {/* 10. FAQ ACCORDION */}
-      <FAQ />
-
-      {/* 12. FOOTER */}
-      <Footer onScrollTo={scrollToSection} />
-
-      {/* CART DRAWER SLIDE-OVER */}
-      <CartModal
-        isOpen={cartOpen}
-        onClose={() => setCartOpen(false)}
-        cartItems={cart}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemoveItem={handleRemoveItem}
-        onClearCart={handleClearCart}
-      />
-    </div>
+    <Router>
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <Home 
+              cart={cart}
+              cartCount={cartCount}
+              onAddToCart={handleAddToCart}
+              onUpdateQuantity={handleUpdateQuantity}
+              onRemoveItem={handleRemoveItem}
+              onClearCart={handleClearCart}
+            />
+          } 
+        />
+        <Route 
+          path="/checkout" 
+          element={
+            <Checkout 
+              cart={cart}
+              onUpdateQuantity={handleUpdateQuantity}
+              onRemoveItem={handleRemoveItem}
+              onClearCart={handleClearCart}
+            />
+          } 
+        />
+        <Route 
+          path="/success" 
+          element={
+            <Success />
+          } 
+        />
+      </Routes>
+    </Router>
   );
 }

@@ -39,9 +39,9 @@ export default function Navbar({ cartItemsCount, onOpenCart, onScrollTo }: Navba
   return (
     <>
       <nav
-        className={`fixed top-5 left-4 right-4 z-50 transition-all duration-500 ease-in-out transform max-w-4xl md:mx-auto rounded-full ${
+        className={`fixed top-5 left-4 right-4 z-50 transition-all duration-500 ease-in-out transform w-auto mx-auto max-w-7xl rounded-full ${
           isScrolled
-            ? 'translate-y-0 opacity-100 bg-white/80 backdrop-blur-lg border border-gray-200/50 shadow-[0_20px_40px_rgba(17,62,46,0.08)] py-2.5 px-5 md:px-7'
+            ? 'translate-y-0 opacity-100 bg-white/80 backdrop-blur-lg border border-gray-200/50 shadow-[0_8px_30px_rgba(0,0,0,0.02)] py-2.5 px-5 md:px-7'
             : '-translate-y-24 opacity-0 pointer-events-none'
         }`}
       >
@@ -139,22 +139,22 @@ export default function Navbar({ cartItemsCount, onOpenCart, onScrollTo }: Navba
 
         {/* MOBILE NAVIGATION DRAWER - Elegant drop-down card relative to parent pill */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-white/95 backdrop-blur-md border border-gray-100 absolute top-[115%] left-0 right-0 shadow-2xl rounded-3xl py-6 px-6 space-y-4 flex flex-col z-50">
+          <div className="lg:hidden bg-white/95 backdrop-blur-md border border-gray-200/50 absolute top-[115%] left-0 right-0 shadow-lg rounded-2xl py-6 px-6 space-y-4 flex flex-col z-50">
             <button
               onClick={() => handleLinkClick('productos')}
-              className="font-display font-extrabold text-xs tracking-widest text-[#113E2E] hover:text-[#EA580C] uppercase text-left py-2.5 border-b border-gray-100"
+              className="font-display font-extrabold text-xs tracking-widest text-[#113E2E] hover:text-[#EA580C] uppercase text-center py-2.5 border-b border-gray-100"
             >
               PRODUCTOS
             </button>
             <button
               onClick={() => handleLinkClick('beneficios')}
-              className="font-display font-extrabold text-xs tracking-widest text-[#113E2E] hover:text-[#EA580C] uppercase text-left py-2.5 border-b border-gray-100"
+              className="font-display font-extrabold text-xs tracking-widest text-[#113E2E] hover:text-[#EA580C] uppercase text-center py-2.5 border-b border-gray-100"
             >
               BENEFICIOS
             </button>
             <button
               onClick={() => handleLinkClick('contacto')}
-              className="font-display font-extrabold text-xs tracking-widest text-[#113E2E] hover:text-[#EA580C] uppercase text-left py-2.5 border-b border-gray-100"
+              className="font-display font-extrabold text-xs tracking-widest text-[#113E2E] hover:text-[#EA580C] uppercase text-center py-2.5 border-b border-gray-100"
             >
               CONTACTO
             </button>

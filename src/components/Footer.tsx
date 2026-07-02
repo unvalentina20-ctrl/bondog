@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bone, Phone, Mail, MapPin, Instagram, Facebook, Heart } from 'lucide-react';
+import { Phone, Mail, Instagram, Facebook } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface FooterProps {
@@ -10,32 +10,27 @@ export default function Footer({ onScrollTo }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contacto" className="bg-white px-4 md:px-8 pb-4 md:pb-8 scroll-mt-24">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full bg-[#111111] text-white rounded-[32px] md:rounded-[48px] py-16 px-6 md:px-12 shadow-xs"
-      >
-        <div className="max-w-6xl mx-auto">
+    <footer id="contacto" className="bg-[#111111] text-white pt-20 pb-0 scroll-mt-24 w-full relative overflow-hidden">
+      {/* Footer Content Container */}
+      <div className="max-w-6xl mx-auto px-6 md:px-12">
+        
         {/* Simplified 3-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/10 text-center md:text-left">
           {/* Column 1: Brand & Socials */}
-          <div className="space-y-5">
+          <div className="space-y-5 flex flex-col items-center md:items-start text-center md:text-left">
             <button
               onClick={() => onScrollTo('hero')}
-              className="cursor-pointer text-left focus:outline-none group block"
+              className="cursor-pointer text-center md:text-left focus:outline-none group block mx-auto md:mx-0"
             >
-              <span className="font-display font-black text-2xl tracking-[0.2em] text-white hover:text-[#EA580C] block leading-none transition-colors duration-300 uppercase select-none">
+              <span className="font-display font-semibold text-2xl tracking-[0.2em] text-white hover:text-[#EA580C] block leading-none transition-colors duration-300 uppercase select-none">
                 BONDOG
               </span>
             </button>
-            <p className="text-xs text-white/60 leading-relaxed font-normal">
+            <p className="text-xs text-white/60 leading-relaxed font-normal max-w-sm">
               Comida cruda biológicamente adecuada congelada al instante para cuidar la salud de tu mascota de por vida.
             </p>
             {/* Social Network icons */}
-            <div className="flex gap-3 pt-1">
+            <div className="flex justify-center md:justify-start gap-3 pt-1">
               <a
                 href="https://instagram.com"
                 target="_blank"
@@ -58,8 +53,8 @@ export default function Footer({ onScrollTo }: FooterProps) {
           </div>
 
           {/* Column 2: Navigation Links */}
-          <div className="space-y-4 md:pl-8">
-            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-voldog-gold">
+          <div className="space-y-4 md:pl-8 flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="font-sans font-bold text-[10px] tracking-wider uppercase text-[#EA580C]">
               ENLACES
             </h4>
             <ul className="space-y-2.5 text-xs text-white/75 font-semibold">
@@ -91,20 +86,20 @@ export default function Footer({ onScrollTo }: FooterProps) {
           </div>
 
           {/* Column 3: Contact & Shipping */}
-          <div className="space-y-4">
-            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-voldog-gold">
+          <div className="space-y-4 flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="font-sans font-bold text-[10px] tracking-wider uppercase text-[#EA580C]">
               SOPORTE Y ENVÍOS
             </h4>
-            <div className="space-y-3 text-xs text-white/75">
-              <p className="flex items-start gap-2.5">
-                <Phone className="w-4 h-4 text-[#EA580C] shrink-0 mt-0.5" />
+            <div className="space-y-3 text-xs text-white/75 flex flex-col items-center md:items-start">
+              <p className="flex items-center md:items-start justify-center md:justify-start gap-2.5">
+                <Phone className="w-4 h-4 text-[#EA580C] shrink-0" />
                 <span>+34 600 00 00 00 (WhatsApp)</span>
               </p>
-              <p className="flex items-start gap-2.5">
-                <Mail className="w-4 h-4 text-[#EA580C] shrink-0 mt-0.5" />
+              <p className="flex items-center md:items-start justify-center md:justify-start gap-2.5">
+                <Mail className="w-4 h-4 text-[#EA580C] shrink-0" />
                 <span>info@bondogfood.com</span>
               </p>
-              <p className="text-[11px] text-white/50 leading-relaxed pt-1 pl-6.5">
+              <p className="text-[11px] text-white/50 leading-relaxed pt-1 text-center md:text-left">
                 Envíos garantizados en 24h a temperatura controlada (-18°C).
               </p>
             </div>
@@ -112,12 +107,7 @@ export default function Footer({ onScrollTo }: FooterProps) {
         </div>
 
         {/* Bottom copyright & legal links */}
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-white/40">
-          <p className="text-center md:text-left font-normal leading-relaxed">
-            © {currentYear} BONDOG Food S.L. Hecho con{' '}
-            <Heart className="w-3.5 h-3.5 fill-red-500 stroke-none inline-block align-middle mx-1" />{' '}
-            para mascotas saludables.
-          </p>
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-white/40 pb-4">
           <div className="flex gap-4 font-semibold">
             <a href="#contacto" className="hover:text-white transition-colors">
               Privacidad
@@ -130,8 +120,14 @@ export default function Footer({ onScrollTo }: FooterProps) {
             </a>
           </div>
         </div>
-        </div>
-      </motion.div>
+      </div>
+
+      {/* Full-width Brand Mark - absolute bottom, edge to edge */}
+      <div className="w-full overflow-hidden mt-12 mb-[-1.5vw] flex justify-center items-end select-none pointer-events-none">
+        <span className="font-display font-black text-[22vw] leading-none tracking-tighter text-white/[0.04] w-full text-center block uppercase translate-y-[10%]">
+          BONDOG
+        </span>
+      </div>
     </footer>
   );
 }
